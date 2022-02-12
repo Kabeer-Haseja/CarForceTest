@@ -1,0 +1,9 @@
+export const HOME_SCREEN="home";
+export const LOGIN_SCREEN="loginpage"
+export const MAIN_SCREEN="mainScreen"
+export const DASHBOARD_SCREEN="Dashboard"
+export const INVENTORY_SCREEN="Inventory"
+export const LEADS_SCREEN="Leads"
+export const MORE_SCREEN="More"
+export const TASKS_SCREEN="Tasks"
+export const TABS_SCREEN="tabs"
