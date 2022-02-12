@@ -8,4 +8,5 @@ export const IC_MORE=require('./ic_more.png');
 export const IC_LEADS=require('./ic_leads.png');
 export const IC_MODERATE=require('./ic_moderate.png')
 export const IC_BUYER=require('./ic_buyer.png')
+export const IC_SELLER=require('./ic_seller.png')
 

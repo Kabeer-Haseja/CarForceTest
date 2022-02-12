@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
-import {IC_BUYER, IC_MODERATE} from '../Assets/Images';
+import {IC_BUYER, IC_MODERATE, IC_SELLER} from '../Assets/Images';
 import moment from 'moment';
 
 
@@ -10,24 +10,24 @@ function leadIdAndProgress(props) {
             flexDirection: 'row',
             alignItems: 'center',
             marginLeft: 20,
-            marginRight: 20,
+         //   marginRight: 20,
             marginTop: 10,
             justifyContent: 'space-between',
-            height: 30,
+      //      height: 30,
         }}>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <View style={{flexDirection: 'row'}}>
+            {/*<View style={{flexDirection: 'row', justifyContent:'space-between',alignItems:'center'}}>*/}
+                <View style={{flexDirection:'row' ,justifyContent:'space-between'}}>
                     <Text style={{color: '#C1C0C0', fontSize: 12}}>
-                        Lead ID:
-                    </Text>
-                    <Text style={{color: '#C1C0C0', fontSize: 12}}>
-                        {props.item.id}
-                    </Text>
-                    <Text style={{marginLeft: 160}}>
+                        Lead ID: {props.item.id}</Text>
+                    </View>
+    
+    
+            <View style={{ marginLeft:140,backgroundColor: '#e2fbff',paddingVertical:5,paddingHorizontal:8 ,borderRadius:20,flexDirection:'row',justifyContent:'center',alignItems:'flex-end'}}>
+                    <Text style={{color: '#288dbc' }}>
                         {props.item.status.name}
                     </Text>
                 </View>
-            </View>
+            {/*</View>*/}
         </View>
     
     );
@@ -45,7 +45,7 @@ function leadName(props) {
         }}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <View style={{flexDirection: 'row'}}>
-                    <Text style={{color: 'black', fontSize: 18}}>
+                    <Text style={{color: 'black', fontSize: 20,fontWeight:'bold'}}>
                         {props.item.client.name}
                     </Text>
                 </View>
@@ -72,8 +72,8 @@ function moderateAndDate(props) {
             
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Image source={IC_MODERATE} style={{height: 15, width: 15, resizeMode: 'contain'}}/>
-                    <Text style={{color: 'black', fontSize: 14}}>
+                       <Image source={IC_MODERATE} style={{height: 15, width: 15, resizeMode: 'contain'}}/>
+                    <Text style={{color: '#7b7b7b', fontSize: 14}}>
                         {props.item.classification}
                     </Text>
                 </View>
@@ -89,12 +89,13 @@ function moderateAndDate(props) {
                 
                 </View>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Image source={IC_BUYER} style={{height: 15, width: 15, resizeMode: 'contain', margin: 7}}/>
-                    <Text style={{color: 'black', fontSize: 14}}>
-                        Buyer:
+                    {props.item.category.name=="Buyer"?  <Image source={IC_BUYER} style={{height: 15, width: 15, resizeMode: 'contain', margin: 7}}/>
+                    :<Image source={IC_SELLER} style={{height: 15, width: 15, resizeMode: 'contain', margin: 7}}/>}
+                    <Text style={{color: '#7b7b7b', fontSize: 14}}>
+                        {props.item.category.name}
                     </Text>
                     <Text style={{marginLeft: 60}}>
-                        {moment(props.item.client.created_at).format('MM/DD/YYYY')}
+                        {moment(props.item.created_at).format('D MMM YYYY')}
                     </Text>
                 </View>
             </View>
@@ -109,10 +110,12 @@ function LeadCardItem(props) {
             style={{
                 borderRadius: 5,
                 backgroundColor: 'white',
-                marginBottom: 10,
+                marginBottom: 8,
                 borderWidth: 0.5,
-                borderColor: 'gray',
-                marginHorizontal: 20,
+                
+                borderColor: 'white',
+                alignItems:'flex-start',
+                justifyContent:'center'
             }}
         >
             {leadIdAndProgress(props)}
