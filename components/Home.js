@@ -5,8 +5,9 @@ import LogoText from './LogoText';
 import {useSelector} from 'react-redux';
 
 function Home(props) {
-    const userExists=useSelector(state => state.loginReducer)
+    const userExists=useSelector(state => state)
     useEffect(() => {
+        console.log(userExists)
     }, []);
     
     return (
@@ -16,7 +17,7 @@ function Home(props) {
                     <LogoText
                         heading={"Login to Car Force"}
                         subHeading={'Hi 👋 Welcome to carforce!'}
-                        subHeading2={' Happy CRM :)'}
+                        subHeading2={' Happy CRMM :)'}
                     />
                         <LoginPage/>
     

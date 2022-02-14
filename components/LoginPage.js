@@ -16,8 +16,8 @@ function LoginPage(props) {
     const dispatch=useDispatch();
     const userData=useSelector(state => state.loginReducer)
     useEffect(()=>{
-        
-        if(userData)
+        console.log(userData)
+        if(userData &&userData.data!=null)
         {
             console.log("dd",userData)
             navigation.navigate(MAIN_SCREEN)

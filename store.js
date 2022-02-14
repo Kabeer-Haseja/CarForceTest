@@ -3,15 +3,17 @@ import {persistStore,persistReducer} from "redux-persist";
 import thunk from 'redux-thunk';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {loginReducer} from './redux/reducers/loginReducer';
+import {leadReducer} from './redux/reducers/LeadReducer';
 
 const rootReducers = combineReducers({
-    loginReducer
+    loginReducer,
+    leadReducer
   })
 
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    whitelist: ['loginReducer']
+    whitelist: ['loginReducer','leadReducer']
 };
 
 

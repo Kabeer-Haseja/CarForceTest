@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function MainPage(props) {
     return (
+        
             <Tabs />
        );
 }
