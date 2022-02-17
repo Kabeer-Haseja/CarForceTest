@@ -1,14 +1,15 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 
 function Inventory(props) {
     return (
+        <SafeAreaView style={{flex:1}}>
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
-        
             <Text>
                 Inventory
             </Text>
-        </View>   );
+        </View>
+        </SafeAreaView>
+            );
 }
-
 export default Inventory;

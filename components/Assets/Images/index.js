@@ -9,4 +9,12 @@ export const IC_LEADS=require('./ic_leads.png');
 export const IC_MODERATE=require('./ic_moderate.png')
 export const IC_BUYER=require('./ic_buyer.png')
 export const IC_SELLER=require('./ic_seller.png')
-
+export const IC_FILTER=require('./ic_filter.png')
+export const IC_ARROW_DOWN=require('./ic_arrow_down.png')
+export const IC_LEAD_CATEGORY=require('./ic_lead_category.png')
+export const IC_EMAIL=require('./ic_email.png')
+export const IC_ASSIGNEE=require('./ic_assignee_filter.png')
+export const IC_NAME=require('./ic_name.png')
+export const IC_RIGHT=require('./ic_right.png')
+export const IC_LEAD_SOURCE=require('./ic_lead_source_filter.png')
+export const IC_CALENDER=require('./ic_calendar.png')

@@ -14,25 +14,13 @@ function LoginPage(props) {
     const navigation=useNavigation()
     const [hide,setHide]=useState(true)
     const dispatch=useDispatch();
-    const userData=useSelector(state => state.loginReducer)
-    useEffect(()=>{
-        console.log(userData)
-        if(userData &&userData.data!=null)
-        {
-            console.log("dd",userData)
-            navigation.navigate(MAIN_SCREEN)
-        
-        }
-        
-    },[])
+    
     async function submit(values) {
         const url = 'https://dev2.empgautos.com/auth/sign_in';
-       await axios.post(url, values).then((resoponse) => {
-           console.log('response',resoponse)
-            if(resoponse.status) {
-                dispatch(AddLead(resoponse))
-                navigation.navigate(MAIN_SCREEN,{headers:resoponse.headers});
-                
+       await axios.post(url, values).then((response) => {
+            if(response.status) {
+                dispatch(AddLead(response))
+                navigation.navigate(MAIN_SCREEN,{headers:response.headers});
             }
         }).catch((error)=> {
             alert("Not Found")

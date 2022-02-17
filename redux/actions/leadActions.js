@@ -14,4 +14,10 @@ export const AddSellerLeads=(SellerLeads)=>{
     }
     
 }
+export const AddPagination=(pagination)=>{
+    return{
+        type:ActionTypes.PAGINATION,
+        payload:pagination
+    }
+}
 
