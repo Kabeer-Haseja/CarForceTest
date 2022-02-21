@@ -2,7 +2,10 @@ import React from "react"
 import {StyleSheet, View} from "react-native"
 
 const Skeleton = (props) => {
+    const {loading} = props;
     return (
+        <>
+            {!!loading &&
         <>
             {Array(6).fill().map((item, index) => {
                 return (
@@ -17,6 +20,8 @@ const Skeleton = (props) => {
                     </View>
                 )
             })}
+        </>
+            }
         </>
     )
 }

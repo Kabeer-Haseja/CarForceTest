@@ -4,5 +4,8 @@ export const ActionTypes={
     BUYER_LEAD:'buyerLead',
     SELLER_LEAD:'sellerLead',
     PAGINATION:'pagination',
+    FILTERED_LEAD_DATA:'filteredData',
+    FILTERED_PAGINATION:'filteredPagination',
+    RESET_FILTERS:'resetFilters'
 }
 

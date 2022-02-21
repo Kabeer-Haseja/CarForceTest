@@ -4,7 +4,8 @@ const initialValues={
     AllLeads:[],
     SellerLeads:[],
     BuyerLeads:[],
-    pagination:{}
+    pagination:{},
+    FilteredLead:{}
 }
 
 export const leadReducer=(state=initialValues,{type,payload})=>{
@@ -15,6 +16,8 @@ export const leadReducer=(state=initialValues,{type,payload})=>{
             return {...state,AllLeads:payload}
         case ActionTypes.PAGINATION:
             return {...state,pagination:payload}
+        case ActionTypes.FILTERED_LEAD_DATA:
+            return {...state,FilteredLead:payload}
         
     
     
