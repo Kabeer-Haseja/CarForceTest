@@ -14,4 +14,28 @@ export const AddSellerLeads=(SellerLeads)=>{
     }
     
 }
+export const AddPagination=(pagination)=>{
+    return{
+        type:ActionTypes.PAGINATION,
+        payload:pagination
+    }
+}
+export const FilteredLeadData=(filtered)=>{
+    return{
+        type:ActionTypes.FILTERED_LEAD_DATA,
+        payload:filtered
+    }
+}
+export const AddFilteredPagination=(pagination)=>{
+    return{
+        type:ActionTypes.FILTERED_PAGINATION,
+        payload:pagination
+    }
+}
+export const ResetFilters=()=>{
+    return{
+        type:ActionTypes.RESET_FILTERS
+    }
+}
+
 

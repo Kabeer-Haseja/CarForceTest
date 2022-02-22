@@ -7,13 +7,12 @@ import FlatListLeads from './FlatListLeads';
 
 function BuyerLeads() {
     const leads = useSelector(state => state.leadReducer);
-    const allLeads = Object.keys(leads.AllLeads).map(key => leads.AllLeads[key]);
-    const buyerLeads = allLeads.filter((item) => item.category.name == 'Buyer');
+    const buyerLeads = leads.AllLeads.filter((item) => item.category.name == 'Buyer');
     
     
     return (
-        <View style={{alignItems: 'center', flex: 1, backgroundColor: '#f2f2f2', margin: 5, borderRadius: 5}}>
-          <FlatListLeads data={buyerLeads}/>
+        <View style={{marginHorizontal:10, flex: 1, backgroundColor: '#f2f2f2', borderRadius: 5,justifyContent:'space-between'}}>
+        <FlatListLeads data={buyerLeads}/>
         </View>
     );
 }

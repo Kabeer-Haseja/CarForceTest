@@ -1,20 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {Dimensions, ScrollView, View, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {Dimensions, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import BottomTabsHeading from './BottomTabsHeading';
-import axios from 'axios';
-import {useDispatch, useSelector} from 'react-redux';
 import {TabBar, TabBarIndicator, TabView} from 'react-native-tab-view';
-import {AddAllLeads} from '../../redux/actions/leadActions';
 import AllLeads from './AllLeads';
 import SellerLeads from './SellerLeads';
 import BuyerLeads from './BuyerLeads';
 
 
 function Leads(props) {
-    const header = useSelector(state => state.loginReducer.headers);
-    const [index, setIndex] = useState(0);
-    const dispatch = useDispatch();
     const initialLayout = {width: Dimensions.get('window').width};
+    const [index, setIndex] = useState(0);
+    
     
     const [routes] = useState([{key: 'All', title: 'All'}, {key: 'Seller', title: 'Seller'}, {
         key: 'Buyer',
@@ -50,37 +46,28 @@ function Leads(props) {
                     renderIndicator={renderIndicator}
                     style={[styles.tabBarStyle, {backgroundColor: '#f2f2f2'}]}
                     tabStyle={styles.tabBarTabStyle}
-                    labelStyle={[styles.tabBarLabelStyle, {left: 0, paddingLeft: 20}]}
+                    labelStyle={[styles.tabBarLabelStyle, {left: 0, paddingLeft: 5,}]}
                     activeColor={'black'}
                     inactiveColor={'gray'}
                 />
             </View>
         </ScrollView>
     );
-    
-    useEffect(() => {
-        console.log('hello');
-        const url = 'https://dev2.empgautos.com/api/crm/crm_leads';
-        axios.get(url, {
-            headers: header,
-        }).then((response) => {
-            dispatch(AddAllLeads({...response.data.crm_leads}));
-        });
-    }, []);
-    return (<View style={{backgroundColor: '#f2f2f2', flex: 1}}>
-        <BottomTabsHeading
-            
-            heading={'ALL Leads'}
-        />
-        <TabView onIndexChange={setIndex}
-                 navigationState={{index, routes}}
-                 renderScene={renderScene}
-                 initialLayout={initialLayout}
-                 renderTabBar={renderTabBar}
-        
-        />
-    
-    </View>);
+    return (
+        <SafeAreaView style={{flex: 1}}>
+            <View style={{backgroundColor: '#f2f2f2', flex: 1}}>
+                <BottomTabsHeading
+                    heading={'All Leads'}
+                />
+                <TabView onIndexChange={setIndex}
+                         navigationState={{index, routes}}
+                         renderScene={renderScene}
+                         initialLayout={initialLayout}
+                         renderTabBar={renderTabBar}
+                />
+            </View>
+        </SafeAreaView>
+    );
 }
 
 export default Leads;
@@ -91,13 +78,11 @@ const styles = StyleSheet.create({
     },
     tabBarIndicatorStyle: {
         backgroundColor: 'black',
-        // borderTopLeftRadius: 300,
-        // borderTopRightRadius: 200,
         height: 3,
+        
     },
     tabBarLabelStyle: {
         textTransform: 'capitalize',
-        //    fontFamily: '',
         left: 20,
     },
     tabBarTabStyle: {

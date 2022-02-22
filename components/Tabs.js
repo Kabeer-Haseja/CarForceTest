@@ -1,14 +1,13 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {DASHBOARD_SCREEN, INVENTORY_SCREEN, LEADS_SCREEN, MORE_SCREEN, TASKS_SCREEN} from '../RouteName';
-import Dashboard from './Dashboard';
-import Inventory from './Inventory';
-import Leads from './Leads';
-import More from './More';
-import Tasks from './Tasks';
+import {DASHBOARD_SCREEN, INVENTORY_SCREEN, LEADS_SCREEN, MORE_SCREEN, TASKS_SCREEN} from './RouteName';
 import {Image, Text, View} from 'react-native';
-import {IC_DASHBOARD, IC_INVENTORY, IC_LEADS, IC_MORE, IC_TASKS} from '../Assets/Images';
-
+import {IC_DASHBOARD, IC_INVENTORY, IC_LEADS, IC_MORE, IC_TASKS} from './Assets/Images';
+import Leads from './bottamTabComponents/Leads';
+import Dashboard from './bottamTabComponents/Dashboard';
+import Tasks from './bottamTabComponents/Tasks';
+import Inventory from './bottamTabComponents/Inventory';
+import More from './bottamTabComponents/More';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,9 +31,9 @@ function Tabs(props) {
     return (
         <Tab.Navigator screenOptions={{
             tabBarShowLabel: false,
+            headerShown:false
         }}>
             <Tab.Screen name={LEADS_SCREEN} component={Leads} options={{
-                headerShown:false,
                 tabBarIcon: ({focused}) => (
                     tabOptions(focused, LEADS_SCREEN, IC_LEADS)),
             }}/>

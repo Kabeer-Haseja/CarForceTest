@@ -9,25 +9,22 @@ function leadIdAndProgress(props) {
         <View style={{
             flexDirection: 'row',
             alignItems: 'center',
-            marginLeft: 20,
-         //   marginRight: 20,
+            marginLeft: 15,
             marginTop: 10,
+            marginRight:10,
             justifyContent: 'space-between',
-      //      height: 30,
         }}>
-            {/*<View style={{flexDirection: 'row', justifyContent:'space-between',alignItems:'center'}}>*/}
-                <View style={{flexDirection:'row' ,justifyContent:'space-between'}}>
+                <View style={{flexDirection:'row'}}>
                     <Text style={{color: '#C1C0C0', fontSize: 12}}>
                         Lead ID: {props.item.id}</Text>
                     </View>
     
     
-            <View style={{ marginLeft:140,backgroundColor: '#e2fbff',paddingVertical:5,paddingHorizontal:8 ,borderRadius:20,flexDirection:'row',justifyContent:'center',alignItems:'flex-end'}}>
+            <View style={{ backgroundColor: '#e2fbff',paddingVertical:5,paddingHorizontal:8 ,borderRadius:20,alignItems:'center'}}>
                     <Text style={{color: '#288dbc' }}>
                         {props.item.status.name}
                     </Text>
                 </View>
-            {/*</View>*/}
         </View>
     
     );
@@ -70,13 +67,12 @@ function moderateAndDate(props) {
             height: 30,
         }}>
             
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
                        <Image source={IC_MODERATE} style={{height: 15, width: 15, resizeMode: 'contain'}}/>
+                  
                     <Text style={{color: '#7b7b7b', fontSize: 14}}>
                         {props.item.classification}
                     </Text>
-                </View>
                 
                 <View style={{
                     backgroundColor: 'gray',
@@ -88,16 +84,20 @@ function moderateAndDate(props) {
                 }}>
                 
                 </View>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    {props.item.category.name=="Buyer"?  <Image source={IC_BUYER} style={{height: 15, width: 15, resizeMode: 'contain', margin: 7}}/>
+                
+                    {props.item.category.name==="Buyer"?  <Image source={IC_BUYER} style={{height: 15, width: 15, resizeMode: 'contain', margin: 7}}/>
                     :<Image source={IC_SELLER} style={{height: 15, width: 15, resizeMode: 'contain', margin: 7}}/>}
                     <Text style={{color: '#7b7b7b', fontSize: 14}}>
                         {props.item.category.name}
                     </Text>
-                    <Text style={{marginLeft: 60}}>
-                        {moment(props.item.created_at).format('D MMM YYYY')}
-                    </Text>
-                </View>
+                    
+                
+            </View>
+            <View>
+                <Text style={{marginLeft: 80,color:'#848c98',fontSize:13}}>
+                    {moment(props.item.created_at).format('D MMM YYYY')}
+                </Text>
+
             </View>
         </View>
     );
@@ -106,16 +106,12 @@ function moderateAndDate(props) {
 function LeadCardItem(props) {
     return (
         <View
-            key={props.item.id}
             style={{
                 borderRadius: 5,
                 backgroundColor: 'white',
                 marginBottom: 8,
                 borderWidth: 0.5,
-                
                 borderColor: 'white',
-                alignItems:'flex-start',
-                justifyContent:'center'
             }}
         >
             {leadIdAndProgress(props)}
