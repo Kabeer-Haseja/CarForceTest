@@ -147,7 +147,7 @@ function FlatListLeads(props) {
                     selectedValue = {
                         id: item.id,
                         type: parentItem,
-                        name: item.name ? item.name : item,
+                        name: item.name ,
                         slug: item.slug,
                         showRightIcon: true,
                     };

@@ -46,6 +46,7 @@ const styles=StyleSheet.create({
         alignItems: 'center',
     },
     textStyle:{fontSize: 12, textTransform: 'capitalize', marginVertical: 10},
-    textInputField:{padding: 0, borderBottomWidth: 0.2, paddingBottom: 10}
+    textInputField:{padding: 0, borderBottomWidth: 1, paddingBottom: 10,   borderColor: '#e8e8e8',
+    }
     
 })

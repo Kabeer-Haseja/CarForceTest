@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const leadFilterAssigneeStyles=StyleSheet.create({
 
     mainView:{
-    backgroundColor:'white',borderRadius:10, paddingLeft:10,paddingRight:10,
+    backgroundColor:'white',borderRadius:8, paddingLeft:15,paddingRight:15,
     height:40,alignItems:'center',flexDirection:'row', marginBottom:5,  elevation: 2,
     justifyContent:'space-between',
 },

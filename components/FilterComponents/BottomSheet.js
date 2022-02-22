@@ -41,7 +41,7 @@ function BottomSheet(props) {
                                 {props.multi ?
                                     props.selectedValue.map((item) => {
                                         return (
-                                            <Text>{item.name}</Text>
+                                            <Text style={{fontWeight:'bold',}}>{item.name}</Text>
                                         );
                                     })
                                     :
@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
         padding: 0,
         borderBottomWidth: 0.2,
         paddingBottom: 10,
+        fontWeight:'bold'
     },
     checkImage: {
         height: 12,
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     horizantilLineView: {height: 1,
-        backgroundColor: 'gray',
+        backgroundColor: '#e8e8e8',
         width: '90%',
         marginHorizontal: 38},
     renderView: {
@@ -160,5 +161,5 @@ const styles = StyleSheet.create({
         tintColor: 'red',
         resizeMode: 'contain',
     },
-    lineView: {width: '100%', height: 1, backgroundColor: '#ececec'},
+    lineView: {width: '100%', height: 1, backgroundColor: '#e8e8e8'},
 });

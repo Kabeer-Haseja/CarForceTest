@@ -1,6 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, Text, TouchableWithoutFeedback, View,StyleSheet} from 'react-native';
-import {IC_CALENDER, IC_EMAIL, IC_LEAD_CATEGORY, IC_LEAD_SOURCE, IC_LEAD_TYPE, IC_NAME} from './Assets/Images';
+import {SafeAreaView, Text, TouchableWithoutFeedback, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {
+    IC_ARROW_LEFT,
+    IC_CALENDER,
+    IC_EMAIL,
+    IC_LEAD_CATEGORY,
+    IC_LEAD_SOURCE,
+    IC_LEAD_TYPE,
+    IC_NAME,
+} from './Assets/Images';
 import BottomSheet from './FilterComponents/BottomSheet';
 import DatePicker from './FilterComponents/DatePicker';
 import LeadChip from './FilterComponents/LeadChip';
@@ -287,10 +295,17 @@ function FiltersPage(props) {
     
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
-            <View>
-                <View style={styles.filtersPageView}>
-                    <Text style={styles.filterPageHeading}>Filters Page</Text>
+            <View style={styles.boxShadowParent}>
+                <View style={styles.boxShadow}>
+                    <View style={styles.top}>
+                        <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+                            <Image source={IC_ARROW_LEFT} resizeMode="contain" style={{ height: 15, width: 15, marginEnd: 10 }}/>
+                        </TouchableWithoutFeedback>
+                
+                        <Text style={styles.title}>Lead Filters</Text>
+                    </View>
                 </View>
+            </View>
                 {l_RefId()}
                 {l_ClientEmail()}
                 {l_LeadAssignee()}
@@ -299,7 +314,6 @@ function FiltersPage(props) {
                 {l_leadChip()}
                 {l_leadCategory()}
                 {l_buttons()}
-            </View>
         
         </SafeAreaView>
     );
@@ -311,7 +325,7 @@ const styles=StyleSheet.create({
     mainViewButton:{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'},
     cancelView:{
         backgroundColor: '#fff',
-        width: '45%',
+        width: '50%',
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
@@ -320,18 +334,51 @@ const styles=StyleSheet.create({
     applyButtonView:{
         backgroundColor: '#ba1f24',
         marginTop: 10,
-        width: '40%',
+        width: '48%',
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
     },
-    filtersPageView:{flexDirection: 'row', margin: 10, alignItems: 'center'},
+    filtersPageView:{
+        flexDirection: 'row',
+        marginHorizontal: 10,
+        alignItems: 'center',
+        paddingLeft:12,
+        justifyContent:'flex-start'
+        
+    },
     filterPageHeading:{
         color: 'black',
         fontSize: 16,
         fontWeight: 'bold',
-        paddingHorizontal: 10,
-        paddingVertical: 20,
+        // paddingHorizontal: 10,
+        paddingVertical: 0,
+    },
+    boxShadowParent: {
+        overflow: 'hidden',
+        paddingBottom: 5
+    },
+    boxShadow: {
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 3,
+    },
+    top: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        paddingHorizontal: 20,
+        height: 60
+    },
+    title: {
+        fontSize: 16,
+        fontWeight: 'bold'
     },
 })

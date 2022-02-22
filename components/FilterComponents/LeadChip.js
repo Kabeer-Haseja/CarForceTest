@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
    
     horizantalLine: {
         height: 1,
-        backgroundColor: 'gray',
+        backgroundColor: '#e8e8e8',
         width: '90%',
         marginHorizontal: 38},
     leadChipTitle:{fontSize: 12,

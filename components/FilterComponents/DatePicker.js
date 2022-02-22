@@ -49,7 +49,7 @@ function DatePicker(props) {
                     </View>
         
                 </View>
-                <View style={{height:1,backgroundColor:'gray',width:"90%",marginHorizontal:38}}/>
+                <View style={{height:1,backgroundColor:'#e8e8e8',width:"90%",marginHorizontal:38}}/>
     
             </View>
        
