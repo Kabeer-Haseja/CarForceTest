@@ -12,9 +12,11 @@ import {
 import {IC_CHECK, IC_RIGHT} from '../Assets/Images';
 import ActionSheet from 'react-native-actions-sheet';
 
+
+
+
 function BottomSheet(props) {
     const bottomSheetRef = createRef();
-    
     function showBottomSheet() {
         bottomSheetRef.current?.show();
     }
@@ -22,7 +24,7 @@ function BottomSheet(props) {
     return (
         
         
-        <View style={{marginHorizontal: 20}}>
+        <View style={{marginHorizontal: 10,marginTop:10}}>
             <TouchableWithoutFeedback onPress={() => showBottomSheet()}>
                 <View>
                     <View style={styles.main}>
@@ -33,22 +35,26 @@ function BottomSheet(props) {
                                 style={styles.imageStyle}
                                 source={props.image}
                             />
+
                         </View>
                         
                         <View style={styles.textView}>
                             <View>
                                 <Text style={styles.textTitle}>{props.title}</Text>
-                                {props.multi ?
-                                    props.selectedValue.map((item) => {
-                                        return (
-                                            <Text style={{fontWeight:'bold',}}>{item.name}</Text>
-                                        );
-                                    })
-                                    :
-                                    <Text style={styles.textTitleOr}>{props.selectedValue[0]?.name}</Text>
+                             
+                                {/*{props.multi ?*/}
+                                {props.selectedValue.map((item) => {
+                                    return (
+                                        <Text style={styles.textTitleOr}>{item.name}</Text>
+                                    );
+                                })
                                 }
+                                {/*}*/}
                             </View>
                   
+                         
+                        </View>
+                        <View>
                             <Image
                                 resizeMode={'contain'}
                                 tintColor={'gray'}
@@ -100,11 +106,11 @@ function BottomSheet(props) {
 }
 
 export default BottomSheet;
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     main: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 20,
+        marginTop: 10,
         justifyContent: 'space-between',
     },
     imageView: {
@@ -115,7 +121,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#F8F9FB',
         alignItems: 'center',
         justifyContent: 'center',
-        alignSelf: 'center',
     },
     imageStyle: {
         height: 15,
@@ -127,26 +132,29 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        width: '90%',
+        width: '80%',
     },
     textTitle: {
-        fontSize: 12,
+        fontSize: 14,
         textTransform: 'capitalize',
-        marginVertical: 10,
+        marginVertical: 5,
     },
     textTitleOr: {
         padding: 0,
         borderBottomWidth: 0.2,
-        paddingBottom: 10,
-        fontWeight:'bold'
-    },
+        fontWeight:'bold',
+       },
     checkImage: {
         height: 12,
         width: 12,
         tintColor: 'black',
         alignItems: 'center',
+        justifyContent:'center'
     },
     horizantilLineView: {height: 1,
+        marginBottom:5,
+        marginTop:10,
+        
         backgroundColor: '#e8e8e8',
         width: '90%',
         marginHorizontal: 38},

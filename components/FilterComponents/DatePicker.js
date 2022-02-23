@@ -4,9 +4,9 @@ import {IC_RIGHT} from '../Assets/Images';
 
 function DatePicker(props) {
     return(
-            <View style={{marginHorizontal:20}}>
+            <View style={{marginHorizontal:10}}>
         
-                <View style={{flexDirection:'row',alignItems:'center',marginTop:20,justifyContent:'space-between'}}>
+                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                     <View style={{ height: 30,
                         width: 30,
                         marginEnd: 10,
@@ -29,10 +29,8 @@ function DatePicker(props) {
                     </View>
             
                     <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',width:"90%"}}>
-                        <View>
-                            <Text style={{fontSize:12,textTransform:'capitalize',marginVertical:10}}>{props.title}</Text>
-                            <Text
-                                style={{padding:0,borderBottomWidth:0.2,paddingBottom:10}}>{props.selectedValue}</Text>
+                        <View style={{alignItems:'center',justifyContent:'center'}}>
+                            <Text style={{fontSize:14,marginVertical:10,alignItems:'center',justifyContent:'center'}}>{props.title}</Text>
                         </View>
                 
                         <Image

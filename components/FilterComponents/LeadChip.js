@@ -3,7 +3,7 @@ import {Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 
 function LeadChip(props) {
     return (
-        <View style={{marginHorizontal: 20}}>
+        <View style={{marginHorizontal: 10}}>
             
             <View style={styles.main}>
                 <View style={styles.imageView}>
@@ -56,7 +56,7 @@ function LeadChip(props) {
 export default LeadChip;
 
 const styles = StyleSheet.create({
-    main: {flexDirection: 'row', alignItems: 'center', marginTop: 20, justifyContent: 'space-between'},
+    main: {flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'},
     imageView: {
         height: 30,
         width: 30,
@@ -78,15 +78,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: '90%'},
     selectedChipView: {
-        borderRadius: 15,
-        padding: 7,
+        borderRadius: 20,
+        padding: 9,
         margin: 3,
         backgroundColor: '#F0F5FC',
         borderWidth: 0.4,
         borderColor: '#ba1f24',
     },
-    unSelectedChipView: {borderRadius: 15,
-        padding: 7,
+    unSelectedChipView: {borderRadius: 20,
+        padding: 10,
         margin: 3,
         backgroundColor: '#F0F5FC',
         borderWidth: 0.4},
@@ -100,10 +100,11 @@ const styles = StyleSheet.create({
    
     horizantalLine: {
         height: 1,
+        marginTop:6,
         backgroundColor: '#e8e8e8',
         width: '90%',
         marginHorizontal: 38},
-    leadChipTitle:{fontSize: 12,
+    leadChipTitle:{fontSize: 14,
         textTransform: 'capitalize',
         marginVertical: 10},
     mapView:{

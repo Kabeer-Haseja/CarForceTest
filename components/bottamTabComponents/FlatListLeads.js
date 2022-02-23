@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, Image, RefreshControl, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import LeadCardItem from './LeadCardItem';
-import {applyFilters, leadsApi} from '../Network/NetworkBuilder';
+import {applyFilters, getLeadsChipStatus, leadAssignee, leadsApi} from '../Network/NetworkBuilder';
 import {useDispatch, useSelector} from 'react-redux';
 import {
     AddAllLeads,
@@ -13,7 +13,11 @@ import {
 import Skeleton from './Skeleton';
 import Filters from '../Filters';
 import {getFieldParams} from '../FiltersPage';
-import {IC_CROSS} from '../Assets/Images';
+import {IC_CROSS, IC_NAME} from '../Assets/Images';
+import Empty from '../FilterComponents/Empty';
+import Assignee from '../Assignee';
+import LeadType from '../LeadType';
+import FastFilters from '../FilterComponents/FastFilters';
 
 
 function FlatListLeads(props) {
@@ -25,6 +29,12 @@ function FlatListLeads(props) {
     const filterReducer = useSelector(state => state.FilteredReducer);
     const [page, setPage] = useState(0);
     const [loading, setLoading] = useState(true);
+    
+    const [assignee, setAssignee] = useState([]);
+    const [assigneesList, setAssigneeList] = useState([]);
+    
+    const[leadChipStatusList,setChipStatusList]=useState([])
+    const [leadChipStatus, setLeadChipStatus] = useState([]);
     
     
     const onEndReached = async () => {
@@ -59,6 +69,7 @@ function FlatListLeads(props) {
     const onRefresh = React.useCallback(async () => {
         setRefreshing(true);
         setLoading(true);
+     
         let arr = [];
         dispatch(AddAllLeads(arr));
         
@@ -67,7 +78,10 @@ function FlatListLeads(props) {
             let update = arr.concat(response.data.crm_leads);
             dispatch(AddPagination(response.data.pagination));
             dispatch(AddAllLeads(update));
+            setAssignee([])
+            setLeadChipStatus([])
             dispatch(ResetFilters());
+    
             setPage(response.data.pagination.current_page);
             setRefreshing(false);
             setLoading(false);
@@ -80,6 +94,20 @@ function FlatListLeads(props) {
         onEndReached();
         
     }, [page]);
+    useEffect(()=>{
+        setAssignee(filterReducer.FilteredLead.assignees)
+        setLeadChipStatus(filterReducer.FilteredLead.categories)
+    },[filterReducer.FilteredLead])
+    async function apiCalls(){
+        const response = await leadAssignee(header);
+        const leadChipStatus=await getLeadsChipStatus(header)
+        setChipStatusList(leadChipStatus.data.categories)
+        setAssigneeList(response.data.users);
+    
+    }
+    useEffect(()=>{
+        apiCalls()
+    },[])
     const filterChips = ({item, index}) => {
         return (
             <View style={styles.mainView}>
@@ -115,6 +143,7 @@ function FlatListLeads(props) {
     
     const filteredOptions = (item) => {
         let appliedFilters = [];
+        
         Object.keys(item).map((parentItem, index) => {
             let selectedValue;
             if (parentItem === 'refId') {
@@ -188,10 +217,34 @@ function FlatListLeads(props) {
     return (
         <View>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Filters/>
+             <Filters/>
+               <FastFilters
+                   options={assigneesList}
+                   onSelectValue={(selected) => {
+                       setAssignee([selected]);
+                   }}
+                   title={'Assignee'}
+                   selectedValue={assignee}
+                   image={IC_NAME}/>
+               
+                <FastFilters
+                    options={leadChipStatusList}
+                    selectedValue={leadChipStatus}
+                    onSelectValue={(chipValue) => {
+                        const filtered = leadChipStatus.some((lead) => lead.id === chipValue.id);
+                        if (filtered) {
+                            let filteredChips = leadChipStatus.filter((lead) => lead.id!== chipValue.id);
+                            setLeadChipStatus(filteredChips);
+                        } else {
+                            setLeadChipStatus((leadChipStatus)=>[...leadChipStatus,chipValue])
+                        }
+                    }}
+                    title={'Lead Type'}
+                    image={IC_NAME}/>
+                <LeadType/>
             </View>
             
-            <View>
+            <View style={{paddingTop:10,paddingBottom:10}}>
                 <FlatList
                     horizontal={true}
                     data={filteredOptions(filterReducer.FilteredLead)}
@@ -234,6 +287,7 @@ function FlatListLeads(props) {
                           );
                       }}
                       ListFooterComponent={<Skeleton loading={loading}/>}
+                      ListEmptyComponent={<Empty/>}
             />
         </View>
     

@@ -28,7 +28,7 @@ function FormInput(props) {
 export default FormInput;
 
 const styles=StyleSheet.create({
-    main:{flexDirection: 'row', alignItems: 'center', marginTop: 20},
+    main:{flexDirection: 'row', alignItems: 'center', marginTop: 10},
     textView:{
         height: 30,
         width: 30,
@@ -45,7 +45,7 @@ const styles=StyleSheet.create({
         tintColor: '#828DA0',
         alignItems: 'center',
     },
-    textStyle:{fontSize: 12, textTransform: 'capitalize', marginVertical: 10},
+    textStyle:{fontSize: 14, textTransform: 'capitalize', marginVertical: 10},
     textInputField:{padding: 0, borderBottomWidth: 1, paddingBottom: 10,   borderColor: '#e8e8e8',
     }
     

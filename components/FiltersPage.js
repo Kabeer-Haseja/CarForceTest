@@ -81,7 +81,7 @@ function FiltersPage(props) {
     const [leadClientEmail, setLeadClientEmail] = useState('');
     const [assignee, setAssignee] = useState([]);
     const [leadSource, setLeadSource] = useState([]);
-    const [createdAt, setCreatedAt] = useState('date');
+    const [createdAt, setCreatedAt] = useState('');
     const [leadChipStatus, setLeadChipStatus] = useState([]);
     const [leadCategory, setLeadCategory] = useState([]);
     
@@ -127,12 +127,12 @@ function FiltersPage(props) {
     
     function l_RefId() {
         return (
-            <View style={{marginHorizontal: 20}}>
+            <View style={{marginHorizontal: 10}}>
                 <FormInput
                     value={leadRefId}
                     title={'LEAD_REF_ID'}
                     keyboardType={'numeric'}
-                    placeholder={'LeadRefId'}
+                    placeholder={'Enter lead ref id'}
                     image={IC_LEAD_CATEGORY}
                     onChangeText={(text) => {
                         setLeadRefId(text);
@@ -146,11 +146,11 @@ function FiltersPage(props) {
     
     function l_ClientEmail() {
         return (
-            <View style={{marginHorizontal: 20}}>
+            <View style={{marginHorizontal: 10}}>
                 <FormInput
                     value={leadClientEmail}
                     title={'LEAD_CLIENT_EMAIL'}
-                    placeholder={'LEAD_CLIENT_EMAIL'}
+                    placeholder={'Enter lead client email'}
                     image={IC_EMAIL}
                     onChangeText={(text) => {
                         setLeadClientEmail(text);
@@ -175,7 +175,7 @@ function FiltersPage(props) {
         );
     }
     
-    function l_leadSource() {
+   function l_leadSource() {
         return (
             <BottomSheet
                 options={leadSourceList}
@@ -310,11 +310,11 @@ function FiltersPage(props) {
                 {l_ClientEmail()}
                 {l_LeadAssignee()}
                 {l_leadSource()}
-                {l_LeadDate()}
                 {l_leadChip()}
                 {l_leadCategory()}
+            <View style={{justifyContent:'flex-end',position:'absolute',bottom:50}}>
                 {l_buttons()}
-        
+            </View>
         </SafeAreaView>
     );
 }
@@ -330,6 +330,7 @@ const styles=StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10,
+        borderRadius:10,
     },
     applyButtonView:{
         backgroundColor: '#ba1f24',

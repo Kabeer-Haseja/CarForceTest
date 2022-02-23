@@ -1,7 +1,14 @@
 import {ActionTypes} from '../contants/ActionTypes';
 
 const initialValues={
-    FilteredLead:{},
+    FilteredLead:{
+        refId:'',
+        email_address:'',
+        assignees:[],
+        leadSources:[],
+        categories:[],
+        categoryTypes:[]
+    },
     filteredPagination:{}
 }
 
