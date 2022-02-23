@@ -72,7 +72,9 @@ function FlatListLeads(props) {
      
         let arr = [];
         dispatch(AddAllLeads(arr));
-        
+        dispatch(AddPagination({}));
+        dispatch(ResetFilters());
+    
         let response = await leadsApi(header, 1);
         if (response?.status) {
             let update = arr.concat(response.data.crm_leads);
@@ -80,8 +82,8 @@ function FlatListLeads(props) {
             dispatch(AddAllLeads(update));
             setAssignee([])
             setLeadChipStatus([])
-            dispatch(ResetFilters());
-    
+            
+            
             setPage(response.data.pagination.current_page);
             setRefreshing(false);
             setLoading(false);
@@ -99,6 +101,8 @@ function FlatListLeads(props) {
         setLeadChipStatus(filterReducer.FilteredLead.categories)
     },[filterReducer.FilteredLead])
     async function apiCalls(){
+        setAssignee([])
+        setChipStatusList([])
         const response = await leadAssignee(header);
         const leadChipStatus=await getLeadsChipStatus(header)
         setChipStatusList(leadChipStatus.data.categories)
@@ -205,7 +209,15 @@ function FlatListLeads(props) {
         let filtered = filters[item.type].filter((sd) => sd.name !== item.name);
         filters[item.type] = filtered;
         dispatch(FilteredLeadData(filters));
-        
+        if(item.type==="assignees")
+        {
+            setAssignee(filtered)
+        }
+        else if(item.type==="categories")
+        {
+            setLeadChipStatus(filtered)
+        }
+    
         const values = await getFieldParams(filters);
         const response = await applyFilters(header, values, 1);
         
@@ -220,9 +232,7 @@ function FlatListLeads(props) {
              <Filters/>
                <FastFilters
                    options={assigneesList}
-                   onSelectValue={(selected) => {
-                       setAssignee([selected]);
-                   }}
+                   onSelectState={setAssignee}
                    title={'Assignee'}
                    selectedValue={assignee}
                    image={IC_NAME}/>
@@ -230,18 +240,11 @@ function FlatListLeads(props) {
                 <FastFilters
                     options={leadChipStatusList}
                     selectedValue={leadChipStatus}
-                    onSelectValue={(chipValue) => {
-                        const filtered = leadChipStatus.some((lead) => lead.id === chipValue.id);
-                        if (filtered) {
-                            let filteredChips = leadChipStatus.filter((lead) => lead.id!== chipValue.id);
-                            setLeadChipStatus(filteredChips);
-                        } else {
-                            setLeadChipStatus((leadChipStatus)=>[...leadChipStatus,chipValue])
-                        }
-                    }}
+                    onSelectState={setLeadChipStatus}
+                    multi={true}
                     title={'Lead Type'}
                     image={IC_NAME}/>
-                <LeadType/>
+           
             </View>
             
             <View style={{paddingTop:10,paddingBottom:10}}>
@@ -252,7 +255,6 @@ function FlatListLeads(props) {
                     contentContainerStyle={{paddingEnd: props.filterApplied ? 0 : 120}}
                     renderItem={
                         ({item, index}) => {
-                            
                             return (
                                 <TouchableWithoutFeedback
                                     onPress={() => {
@@ -286,8 +288,8 @@ function FlatListLeads(props) {
                               <LeadCardItem item={item} key={item.id}/>
                           );
                       }}
-                      ListFooterComponent={<Skeleton loading={loading}/>}
-                      ListEmptyComponent={<Empty/>}
+                      ListFooterComponent={<Skeleton loading={loading} data={props.data}/>}
+                      ListEmptyComponent={<Empty data={props.data} loading={loading}/>}
             />
         </View>
     

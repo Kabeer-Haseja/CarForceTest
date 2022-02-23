@@ -2,10 +2,10 @@ import React from "react"
 import {StyleSheet, View} from "react-native"
 
 const Skeleton = (props) => {
-    const {loading} = props;
+    const {loading, data} = props;
     return (
         <>
-            {!!loading &&
+            {!!loading && !data.length &&
         <>
             {Array(6).fill().map((item, index) => {
                 return (

@@ -2,6 +2,7 @@ import React from 'react';
 import {Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 
 function LeadChip(props) {
+    
     return (
         <View style={{marginHorizontal: 10}}>
             
@@ -14,7 +15,6 @@ function LeadChip(props) {
                         source={props.image}
                     />
                 </View>
-                
                 <View style={styles.textView}>
                     <View>
                         <Text
@@ -22,7 +22,6 @@ function LeadChip(props) {
                         <View style={styles.mapView}>
                             {props.options.map((item, index) => {
                                 let checkSelectedValue = props.selectedValue.some((selected) => selected.id === item.id);
-                                
                                 return (
                                     <TouchableOpacity
                                         key={item.id}
@@ -37,6 +36,7 @@ function LeadChip(props) {
                                             <View style={styles.unSelectedChipView}>
                                                 <Text style={styles.unSelectedText}>{item.name}</Text>
                                             </View>
+                                           
                                         }
                                     
                                     </TouchableOpacity>
@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
         tintColor: '#828DA0',
         alignItems: 'center',
     },
-    textView: {flexDirection: 'row',
+    textView: {
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '90%'},
@@ -85,17 +86,21 @@ const styles = StyleSheet.create({
         borderWidth: 0.4,
         borderColor: '#ba1f24',
     },
-    unSelectedChipView: {borderRadius: 20,
-        padding: 10,
+    unSelectedChipView: {
+        borderRadius: 20,
+        padding: 9,
         margin: 3,
         backgroundColor: '#F0F5FC',
-        borderWidth: 0.4},
+        borderWidth: 0.4
+    },
     selectedText: {
         color: '#ba1f24',
         fontWeight: 'bold'
     },
     unSelectedText: {
-        color: '#575e64'
+        color: '#575e64',
+        fontWeight: 'bold'
+    
     },
    
     horizantalLine: {

@@ -11,20 +11,37 @@ import {
 } from 'react-native';
 import {IC_CHECK, IC_RIGHT} from '../Assets/Images';
 import ActionSheet from 'react-native-actions-sheet';
-
-
+import CustomActionSheet from './CustomActionSheet';
+import LeadChip from './LeadChip';
 
 
 function BottomSheet(props) {
     const bottomSheetRef = createRef();
+    
     function showBottomSheet() {
         bottomSheetRef.current?.show();
     }
     
+    function checkSingleOrMultipleFilters(selected) {
+        if (props.multi) {
+            const filtered = props.selectedValue.some((lead) => lead.id === selected.id);
+            if (filtered) {
+                let filteredLeads = props.selectedValue.filter((lead) => lead.id !== selected.id);
+                props.onSelectState(filteredLeads);
+            } else {
+                let temp = [...props.selectedValue];
+                temp.push(selected);
+                props.onSelectState(temp);
+            }
+        }
+        else {
+            props.onSelectState([selected]);
+        }
+    }
+    
+    
     return (
-        
-        
-        <View style={{marginHorizontal: 10,marginTop:10}}>
+        <View style={{marginHorizontal: 10, marginTop: 10}}>
             <TouchableWithoutFeedback onPress={() => showBottomSheet()}>
                 <View>
                     <View style={styles.main}>
@@ -35,24 +52,19 @@ function BottomSheet(props) {
                                 style={styles.imageStyle}
                                 source={props.image}
                             />
-
                         </View>
-                        
                         <View style={styles.textView}>
                             <View>
                                 <Text style={styles.textTitle}>{props.title}</Text>
-                             
+                                
                                 {/*{props.multi ?*/}
-                                {props.selectedValue.map((item) => {
-                                    return (
-                                        <Text style={styles.textTitleOr}>{item.name}</Text>
-                                    );
-                                })
-                                }
-                                {/*}*/}
+                                
+                                <Text style={styles.textTitleOr}>
+                                    {props.selectedValue.map((item) => item.name).join(', ')}
+                                </Text>
+                            
+                            
                             </View>
-                  
-                         
                         </View>
                         <View>
                             <Image
@@ -67,42 +79,16 @@ function BottomSheet(props) {
                     <View style={styles.horizantilLineView}/>
                 </View>
             </TouchableWithoutFeedback>
-            
-            <ActionSheet ref={bottomSheetRef}>
-                <ScrollView style={{}}>
-                    <FlatList data={props.options}
-                              keyExtractor={(item) => item.id}
-                              renderItem={({item,index}) => {
-                                  let checkSelectedValue = props.selectedValue.some((selected) => selected.id === item.id);
-                                  return (
-                                      <View>
-                                          <TouchableOpacity
-                                              key={index}
-                                              onPress={() => {
-                                                  props.onSelectValue(item);
-                                              }
-                                              }>
-                                              <View style={styles.renderView}>
-                                                  <Text style={{fontSize: 14, color: 'black'}}>
-                                                      {item.name}
-                                                  </Text>
-                                                  {(checkSelectedValue) &&
-                                                      <Image source={IC_CHECK} style={styles.icCheckImage}/>
-                                                  }
-                                              </View>
-                                              <View style={styles.lineView}></View>
-                                          </TouchableOpacity>
-                                      </View>
-                                  );
-                              }
-                              }/>
-                </ScrollView>
-            </ActionSheet>
+            <CustomActionSheet bottomSheetRef={bottomSheetRef} options={props.options}
+                               selectedValue={props.selectedValue}
+                               onSelectValue={props.onSelectValue}
+                               checkSingleOrMultipleFilters={checkSingleOrMultipleFilters} multi={props.multi}/>
         
         
         </View>
-    
     );
+    
+    
 }
 
 export default BottomSheet;
@@ -142,22 +128,24 @@ export const styles = StyleSheet.create({
     textTitleOr: {
         padding: 0,
         borderBottomWidth: 0.2,
-        fontWeight:'bold',
-       },
+        fontWeight: 'bold',
+    },
     checkImage: {
         height: 12,
         width: 12,
         tintColor: 'black',
         alignItems: 'center',
-        justifyContent:'center'
+        justifyContent: 'center',
     },
-    horizantilLineView: {height: 1,
-        marginBottom:5,
-        marginTop:10,
+    horizantilLineView: {
+        height: 1,
+        marginBottom: 5,
+        marginTop: 10,
         
         backgroundColor: '#e8e8e8',
         width: '90%',
-        marginHorizontal: 38},
+        marginHorizontal: 38,
+    },
     renderView: {
         justifyContent: 'space-between',
         flexDirection: 'row',

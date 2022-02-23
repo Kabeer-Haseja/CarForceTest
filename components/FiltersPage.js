@@ -23,6 +23,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {AddAllLeads, AddFilteredPagination, FilteredLeadData} from '../redux/actions/leadActions';
 import FormInput from './FilterComponents/FormInput';
+import TestDesign from './FilterComponents/TestDesign';
 
 export async  function getFieldParams(values){
     let query = ""
@@ -125,7 +126,7 @@ function FiltersPage(props) {
     }, []);
     
     
-    function l_RefId() {
+    function renderLeadRefId() {
         return (
             <View style={{marginHorizontal: 10}}>
                 <FormInput
@@ -144,7 +145,7 @@ function FiltersPage(props) {
         );
     }
     
-    function l_ClientEmail() {
+    function renderLeadClientEmail() {
         return (
             <View style={{marginHorizontal: 10}}>
                 <FormInput
@@ -161,7 +162,7 @@ function FiltersPage(props) {
     }
     
     
-    function l_LeadAssignee() {
+    function renderLeadAssignee() {
         return (
             <BottomSheet
                 options={assigneesList}
@@ -170,24 +171,18 @@ function FiltersPage(props) {
                 }}
                 title={'Assignee'}
                 selectedValue={assignee}
+                onSelectState={setAssignee}
+                multi={false}
                 image={IC_NAME}
             />
         );
     }
     
-   function l_leadSource() {
+   function renderLeadSource() {
         return (
             <BottomSheet
                 options={leadSourceList}
-                onSelectValue={(selected) => {
-                    const filtered = leadSource.some((lead) => lead.id === selected.id);
-                    if (filtered) {
-                        let filteredLeads = leadSource.filter((lead) => lead.id !== selected.id);
-                        setLeadSource(filteredLeads);
-                    } else {
-                        setLeadSource((leadSource) => [...leadSource, selected]);
-                    }
-                }}
+                onSelectState={setLeadSource}
                 title={'Lead Source'}
                 multi={true}
                 selectedValue={leadSource}
@@ -209,7 +204,7 @@ function FiltersPage(props) {
         );
     }
     
-    function l_leadChip() {
+    function renderLeadChip() {
         return (
             <LeadChip
                 options={leadChipStatusList}
@@ -223,26 +218,20 @@ function FiltersPage(props) {
                         setLeadChipStatus((leadChipStatus)=>[...leadChipStatus,chipValue])
                     }
                 }}
+          
                 title={'Lead Type'}
                 image={IC_LEAD_TYPE}
             />
         );
     }
-    function l_leadCategory() {
+    function renderLeadCategory() {
         return (
             <BottomSheet
                 options={leadCategoryList}
-                onSelectValue={(selected) => {
-                    const filtered = leadCategory.some((lead) => lead.id === selected.id);
-                    if (filtered) {
-                        let filteredLeads = leadCategory.filter((lead) => lead.id !== selected.id);
-                        setLeadCategory(filteredLeads);
-                    } else {
-                        setLeadCategory((leadCategory)=>[...leadCategory,selected])
-                    } }}
                 multi={true}
                 title={'Lead Category'}
                 selectedValue={leadCategory}
+                onSelectState={setLeadCategory}
                 image={IC_LEAD_CATEGORY}/>
         
         
@@ -260,7 +249,6 @@ function FiltersPage(props) {
             
         }
         dispatch(FilteredLeadData(filterObj))
-       
        const values=  await getFieldParams(filterObj)
        const response= await applyFilters(header,values,1)
       
@@ -280,7 +268,7 @@ function FiltersPage(props) {
                     </View>
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={()=>{
-                   
+                 
                     filterButtonHandler()
                 }
                 }>
@@ -306,13 +294,13 @@ function FiltersPage(props) {
                     </View>
                 </View>
             </View>
-                {l_RefId()}
-                {l_ClientEmail()}
-                {l_LeadAssignee()}
-                {l_leadSource()}
-                {l_leadChip()}
-                {l_leadCategory()}
-            <View style={{justifyContent:'flex-end',position:'absolute',bottom:50}}>
+                {renderLeadRefId()}
+                {renderLeadClientEmail()}
+                {renderLeadAssignee()}
+                {renderLeadSource()}
+                {renderLeadChip()}
+                {renderLeadCategory()}
+            <View style={styles.buttonStyle}>
                 {l_buttons()}
             </View>
         </SafeAreaView>
@@ -382,4 +370,5 @@ const styles=StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold'
     },
+    buttonStyle:{justifyContent:'flex-end',position:'absolute',bottom:50}
 })
