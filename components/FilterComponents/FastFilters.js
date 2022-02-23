@@ -9,55 +9,56 @@ import {useDispatch, useSelector} from 'react-redux';
 import CustomActionSheet from './CustomActionSheet';
 
 function FastFilters(props) {
-    const filterReducer=useSelector(state => state.FilteredReducer)
+    const filterReducer = useSelector(state => state.FilteredReducer);
     const header = useSelector(state => state.loginReducer.headers);
     
     const bottomSheetRef = createRef();
-    const dispatch=useDispatch()
+    const dispatch = useDispatch();
+    
     function showBottomSheet() {
         bottomSheetRef.current?.show();
     }
     
-    function checkSingleOrMultipleFilters(selected){
-        if(props.multi) {
+    function checkSingleOrMultipleFilters(selected) {
+        if (props.multi) {
             const filtered = props.selectedValue.some((lead) => lead.id === selected.id);
             if (filtered) {
                 let filteredLeads = props.selectedValue.filter((lead) => lead.id !== selected.id);
                 props.onSelectState(filteredLeads);
             } else {
-                let temp = [...props.selectedValue]
-                temp.push(selected)
-                props.onSelectState(temp)
+                let temp = [...props.selectedValue];
+                temp.push(selected);
+                props.onSelectState(temp);
             }
-        }
-        else{
-            props.onSelectState([selected])
+        } else {
+            props.onSelectState([selected]);
         }
     }
+    
     async function setFilter() {
-    
+        
         let filters = filterReducer.FilteredLead;
-        if(props.title==='Assignee')
-        {
-            filters['assignees']=props.selectedValue
+        if (props.title === 'Assignee') {
+            filters['assignees'] = props.selectedValue;
         }
-        if(props.title==='Lead Type'){
-            filters['categories']=props.selectedValue
+        if (props.title === 'Lead Type') {
+            filters['categories'] = props.selectedValue;
         }
-         dispatch(FilteredLeadData(filters))
-         const values=  await getFieldParams(filters)
-         const response= await applyFilters(header,values,1)
-         dispatch(AddFilteredPagination(response.data.pagination))
-         dispatch(AddAllLeads(response.data.crm_leads))
+        dispatch(FilteredLeadData(filters));
+        const values = await getFieldParams(filters);
+        const response = await applyFilters(header, values, 1);
+        dispatch(AddFilteredPagination(response.data.pagination));
+        dispatch(AddAllLeads(response.data.crm_leads));
     }
-    useEffect(()=>{
-        setFilter()
     
-    },[props.selectedValue])
-   
+    useEffect(() => {
+        setFilter();
+        
+    }, [props.selectedValue]);
+    
     return (
         <View style={{marginHorizontal: 10}}>
-            <TouchableOpacity onPress={()=>showBottomSheet()
+            <TouchableOpacity onPress={() => showBottomSheet()
             }>
                 <View style={leadFilterAssigneeStyles.mainView}>
                     <Text style={leadFilterAssigneeStyles.text}>{props.title}</Text>
@@ -65,15 +66,14 @@ function FastFilters(props) {
                 </View>
             </TouchableOpacity>
             
-            <CustomActionSheet bottomSheetRef={bottomSheetRef} options={props.options} selectedValue={props.selectedValue}
+            <CustomActionSheet bottomSheetRef={bottomSheetRef} options={props.options}
+                               selectedValue={props.selectedValue}
                                onSelectValue={props.onSelectValue}
                                checkSingleOrMultipleFilters={checkSingleOrMultipleFilters} multi={props.multi}
             />
-         
-        
-        
         </View>
     
     );
 }
+
 export default FastFilters;

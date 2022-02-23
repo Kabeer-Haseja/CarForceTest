@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, Text, TouchableWithoutFeedback, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {Image, SafeAreaView, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import {
     IC_ARROW_LEFT,
     IC_CALENDER,
@@ -23,7 +23,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {AddAllLeads, AddFilteredPagination, FilteredLeadData} from '../redux/actions/leadActions';
 import FormInput from './FilterComponents/FormInput';
-import TestDesign from './FilterComponents/TestDesign';
 
 export async  function getFieldParams(values){
     let query = ""

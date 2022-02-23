@@ -15,8 +15,6 @@ import Filters from '../Filters';
 import {getFieldParams} from '../FiltersPage';
 import {IC_CROSS, IC_NAME} from '../Assets/Images';
 import Empty from '../FilterComponents/Empty';
-import Assignee from '../Assignee';
-import LeadType from '../LeadType';
 import FastFilters from '../FilterComponents/FastFilters';
 
 

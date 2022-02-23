@@ -57,8 +57,6 @@ function BottomSheet(props) {
                             <View>
                                 <Text style={styles.textTitle}>{props.title}</Text>
                                 
-                                {/*{props.multi ?*/}
-                                
                                 <Text style={styles.textTitleOr}>
                                     {props.selectedValue.map((item) => item.name).join(', ')}
                                 </Text>
