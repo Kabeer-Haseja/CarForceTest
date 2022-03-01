@@ -5,6 +5,23 @@ import {styles} from './BottomSheet';
 import {IC_CHECK} from '../Assets/Images';
 
 function CustomActionSheet(props) {
+    function checkSingleOrMultipleFilters(selected)
+    {
+        if (props.multi) {
+            const filtered = props.selectedValue.some((lead) => lead.id === selected.id);
+            if (filtered) {
+                let filteredLeads = props.selectedValue.filter((lead) => lead.id !== selected.id);
+                props.onSelectState(filteredLeads);
+            } else {
+                let temp = [...props.selectedValue];
+                temp.push(selected);
+                props.onSelectState(temp);
+            }
+        }
+        else {
+            props.onSelectState([selected]);
+        }
+    }
     return (
         <ActionSheet ref={props.bottomSheetRef}>
             <ScrollView>
@@ -16,7 +33,7 @@ function CustomActionSheet(props) {
                                   <View key={item?.id + index}>
                                       <TouchableOpacity
                                           onPress={() => {
-                                                  props.checkSingleOrMultipleFilters(item)
+                                                  checkSingleOrMultipleFilters(item)
                                           }
                                           }>
                                           <View style={styles.renderView}>

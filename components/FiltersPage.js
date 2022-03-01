@@ -165,9 +165,6 @@ function FiltersPage(props) {
         return (
             <BottomSheet
                 options={assigneesList}
-                onSelectValue={(selected) => {
-                    setAssignee([selected]);
-                }}
                 title={'Assignee'}
                 selectedValue={assignee}
                 onSelectState={setAssignee}

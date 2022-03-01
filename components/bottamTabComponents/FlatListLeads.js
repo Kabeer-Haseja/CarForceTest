@@ -136,7 +136,9 @@ function FlatListLeads(props) {
             if (page < filterReducer.filteredPagination?.total_pages) {
                 setPage(filterReducer.filteredPagination?.next_page);
                 onEndReached();
-            } else {
+            }
+            else {
+            
             }
         } else if (page < leads.pagination.total_pages) {
             setPage(leads.pagination.next_page);
@@ -226,7 +228,7 @@ function FlatListLeads(props) {
     
     return (
         <View>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between',alignItems:'center'}}>
              <Filters/>
                <FastFilters
                    options={assigneesList}
@@ -245,7 +247,7 @@ function FlatListLeads(props) {
            
             </View>
             
-            <View style={{paddingTop:10,paddingBottom:10}}>
+            <View style={{paddingTop:4,paddingBottom:8}}>
                 <FlatList
                     horizontal={true}
                     data={filteredOptions(filterReducer.FilteredLead)}

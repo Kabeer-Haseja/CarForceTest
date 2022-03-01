@@ -1,7 +1,9 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {IC_BUYER, IC_MODERATE, IC_SELLER} from '../Assets/Images';
 import moment from 'moment';
+import {useNavigation} from '@react-navigation/native';
+import {LEAD_DETAIL_SCREEN} from '../RouteName';
 
 
 function leadIdAndProgress(props) {
@@ -104,7 +106,12 @@ function moderateAndDate(props) {
 }
 
 function LeadCardItem(props) {
+    const navigation=useNavigation();
+    
     return (
+        <TouchableOpacity onPress={()=>{
+            navigation.navigate(LEAD_DETAIL_SCREEN, props.item)
+        }}>
         <View
             style={{
                 borderRadius: 5,
@@ -119,6 +126,7 @@ function LeadCardItem(props) {
             {moderateAndDate(props)}
         
         </View>
+        </TouchableOpacity>
     );
 }
 

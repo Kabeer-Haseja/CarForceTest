@@ -11,7 +11,7 @@ function BuyerLeads() {
     
     
     return (
-        <View style={{marginHorizontal:10, flex: 1, backgroundColor: '#f2f2f2', borderRadius: 5,justifyContent:'space-between'}}>
+        <View style={{marginHorizontal:10, flex: 1, backgroundColor: '#f2f2f2', justifyContent:'space-between'}}>
         <FlatListLeads data={buyerLeads}/>
         </View>
     );

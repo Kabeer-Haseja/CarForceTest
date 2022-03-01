@@ -19,21 +19,7 @@ function FastFilters(props) {
         bottomSheetRef.current?.show();
     }
     
-    function checkSingleOrMultipleFilters(selected) {
-        if (props.multi) {
-            const filtered = props.selectedValue.some((lead) => lead.id === selected.id);
-            if (filtered) {
-                let filteredLeads = props.selectedValue.filter((lead) => lead.id !== selected.id);
-                props.onSelectState(filteredLeads);
-            } else {
-                let temp = [...props.selectedValue];
-                temp.push(selected);
-                props.onSelectState(temp);
-            }
-        } else {
-            props.onSelectState([selected]);
-        }
-    }
+    
     
     async function setFilter() {
         
@@ -69,7 +55,8 @@ function FastFilters(props) {
             <CustomActionSheet bottomSheetRef={bottomSheetRef} options={props.options}
                                selectedValue={props.selectedValue}
                                onSelectValue={props.onSelectValue}
-                               checkSingleOrMultipleFilters={checkSingleOrMultipleFilters} multi={props.multi}
+                               onSelectState={props.onSelectState}
+                                multi={props.multi}
             />
         </View>
     

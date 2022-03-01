@@ -8,3 +8,4 @@ export const MORE_SCREEN="More"
 export const TASKS_SCREEN="Tasks"
 export const TABS_SCREEN="tabs"
 export const FILTER_SCREEN="filterScreen";
+export const LEAD_DETAIL_SCREEN="leadDetailPage";

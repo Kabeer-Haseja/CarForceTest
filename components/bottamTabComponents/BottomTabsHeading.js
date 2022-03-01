@@ -3,8 +3,8 @@ import {Text, View} from 'react-native';
 
 function BottomTabsHeading(props) {
     return (
-        <View style={{margin:12 }}>
-        <Text style={{fontSize:20,fontWeight:'700'}}>
+        <View style={{backgroundColor:'#fff' }}>
+        <Text style={{fontSize:20,fontWeight:'700',paddingLeft:15,marginTop:10}}>
             {props.heading}
         </Text>
         </View>

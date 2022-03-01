@@ -2,7 +2,14 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './components/Home';
-import {FILTER_SCREEN, HOME_SCREEN, LEADS_SCREEN, MAIN_SCREEN, TABS_SCREEN} from './components/RouteName';
+import {
+    FILTER_SCREEN,
+    HOME_SCREEN,
+    LEAD_DETAIL_SCREEN,
+    LEADS_SCREEN,
+    MAIN_SCREEN,
+    TABS_SCREEN,
+} from './components/RouteName';
 import MainPage from './components/MainPage';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Provider, useSelector} from 'react-redux';
@@ -12,6 +19,7 @@ import Leads from './components/bottamTabComponents/Leads';
 import Tabs from './components/Tabs';
 import Filters from './components/Filters';
 import FiltersPage from './components/FiltersPage';
+import LeadDetailPage from './components/LeadsDetailedComponents/leadDetailPage';
 
 function App(props) {
     const Stack = createNativeStackNavigator();
@@ -28,6 +36,7 @@ function App(props) {
                         
                         <Stack.Screen name={LEADS_SCREEN} component={Leads}/>
                         <Stack.Screen name={FILTER_SCREEN} component={FiltersPage}/>
+                        <Stack.Screen name={LEAD_DETAIL_SCREEN}component={LeadDetailPage}/>
                     
                     </Stack.Navigator>
                 </NavigationContainer>

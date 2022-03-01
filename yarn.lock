@@ -1567,6 +1567,11 @@
   dependencies:
     "event-target-shim" "^5.0.0"
 
+"abortcontroller-polyfill@^1.4.0":
+  "integrity" "sha512-zetDJxd89y3X99Kvo4qFx8GKlt6GsvN3UcRZHwU6iFA/0KiOmhkTVhe8oRoTBiTVPZu09x3vCra47+w8Yz1+2Q=="
+  "resolved" "https://registry.npmjs.org/abortcontroller-polyfill/-/abortcontroller-polyfill-1.7.3.tgz"
+  "version" "1.7.3"
+
 "absolute-path@^0.0.0":
   "integrity" "sha1-p4di+9rftSl76ZsV01p4Wy8JW/c="
   "resolved" "https://registry.npmjs.org/absolute-path/-/absolute-path-0.0.0.tgz"
@@ -3655,6 +3660,11 @@
   "integrity" "sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ=="
   "resolved" "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz"
   "version" "2.0.4"
+
+"initials@^3.0.1":
+  "integrity" "sha512-Sltg35nx8+GX1w4U86rmbxFEmqFiSuMJviS6cB2KChB+jcT2/8Td+nlImXD74HkqpZF5PMv8hN57AyrA/7ltXw=="
+  "resolved" "https://registry.npmjs.org/initials/-/initials-3.1.2.tgz"
+  "version" "3.1.2"
 
 "internal-slot@^1.0.3":
   "integrity" "sha512-O0DB1JC/sPyZl7cIo78n5dR7eUSwwpYPiXRhTzNxZVAMUuB8vlnRFyLxdrVToks6XPLVnFfbzaVd5WLjhgg+vA=="
@@ -5813,6 +5823,15 @@
   "integrity" "sha512-M5pRN6utQfytKWoKlKVzg5NbkYu308qNoW1khGTtEOTs1k14p2dHJ/BWOJoJYHKbPVUyZldbG9MFT7gUl4YHnw=="
   "resolved" "https://registry.npmjs.org/react-native-tab-view/-/react-native-tab-view-3.1.1.tgz"
   "version" "3.1.1"
+
+"react-native-user-avatar@^1.0.8":
+  "integrity" "sha512-OYm7cfEt0IjiL739OGwRZoBCCuAn6CectNcyi1tsa5WtDZjQm7eK0B1mymxZfqELZ847wcDIuevHM9obr4+kxw=="
+  "resolved" "https://registry.npmjs.org/react-native-user-avatar/-/react-native-user-avatar-1.0.8.tgz"
+  "version" "1.0.8"
+  dependencies:
+    "abortcontroller-polyfill" "^1.4.0"
+    "initials" "^3.0.1"
+    "prop-types" "^15.7.2"
 
 "react-native-windows@>=0.62":
   "integrity" "sha512-E0bJjAWIonHSFJU/SreQl2ErPV/z1uFIxTdKGY67gzQ001V/V6q4JeGQ5nwqeaPog7TWx38m7yPPKPB2bdHiHw=="

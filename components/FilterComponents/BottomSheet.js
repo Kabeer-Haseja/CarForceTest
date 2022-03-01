@@ -1,18 +1,7 @@
 import React, {createRef} from 'react';
-import {
-    FlatList,
-    Image,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-    View,
-} from 'react-native';
-import {IC_CHECK, IC_RIGHT} from '../Assets/Images';
-import ActionSheet from 'react-native-actions-sheet';
+import {Image, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {IC_RIGHT} from '../Assets/Images';
 import CustomActionSheet from './CustomActionSheet';
-import LeadChip from './LeadChip';
 
 
 function BottomSheet(props) {
@@ -22,70 +11,53 @@ function BottomSheet(props) {
         bottomSheetRef.current?.show();
     }
     
-    function checkSingleOrMultipleFilters(selected) {
-        if (props.multi) {
-            const filtered = props.selectedValue.some((lead) => lead.id === selected.id);
-            if (filtered) {
-                let filteredLeads = props.selectedValue.filter((lead) => lead.id !== selected.id);
-                props.onSelectState(filteredLeads);
-            } else {
-                let temp = [...props.selectedValue];
-                temp.push(selected);
-                props.onSelectState(temp);
-            }
-        }
-        else {
-            props.onSelectState([selected]);
-        }
-    }
+   
     
-    
-    return (
-        <View style={{marginHorizontal: 10, marginTop: 10}}>
-            <TouchableWithoutFeedback onPress={() => showBottomSheet()}>
-                <View>
-                    <View style={styles.main}>
-                        <View style={styles.imageView}>
-                            <Image
-                                resizeMode={'contain'}
-                                tintColor={'gray'}
-                                style={styles.imageStyle}
-                                source={props.image}
-                            />
-                        </View>
-                        <View style={styles.textView}>
-                            <View>
-                                <Text style={styles.textTitle}>{props.title}</Text>
-                                
-                                <Text style={styles.textTitleOr}>
-                                    {props.selectedValue.map((item) => item.name).join(', ')}
-                                </Text>
-                            
-                            
+        return (
+            <View style={{marginHorizontal: 10, marginTop: 10}}>
+                <TouchableWithoutFeedback onPress={() => showBottomSheet()}>
+                    <View>
+                        <View style={styles.main}>
+                            <View style={styles.imageView}>
+                                <Image
+                                    resizeMode={'contain'}
+                                    tintColor={'gray'}
+                                    style={styles.imageStyle}
+                                    source={props.image}
+                                />
                             </View>
-                        </View>
-                        <View>
-                            <Image
-                                resizeMode={'contain'}
-                                tintColor={'gray'}
-                                style={styles.checkImage}
-                                source={IC_RIGHT}
-                            />
-                        </View>
+                            <View style={styles.textView}>
+                                <View>
+                                    <Text style={styles.textTitle}>{props.title}</Text>
+                                
+                                    <Text style={styles.textTitleOr}>
+                                        {props.selectedValue.map((item) => item.name).join(', ')}
+                                    </Text>
+                            
+                            
+                                </View>
+                            </View>
+                            <View>
+                                <Image
+                                    resizeMode={'contain'}
+                                    tintColor={'gray'}
+                                    style={styles.checkImage}
+                                    source={IC_RIGHT}
+                                />
+                            </View>
                     
+                        </View>
+                        <View style={styles.horizantilLineView}/>
                     </View>
-                    <View style={styles.horizantilLineView}/>
-                </View>
-            </TouchableWithoutFeedback>
-            <CustomActionSheet bottomSheetRef={bottomSheetRef} options={props.options}
-                               selectedValue={props.selectedValue}
-                               onSelectValue={props.onSelectValue}
-                               checkSingleOrMultipleFilters={checkSingleOrMultipleFilters} multi={props.multi}/>
+                </TouchableWithoutFeedback>
+                <CustomActionSheet bottomSheetRef={bottomSheetRef} options={props.options}
+                                   selectedValue={props.selectedValue}
+                                   onSelectState={props.onSelectState}
+                                    multi={props.multi}/>
         
         
-        </View>
-    );
-    
+            </View>
+        );
     
 }
 
