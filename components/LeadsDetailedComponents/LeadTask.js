@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Image, ScrollView, Text, TouchableOpacity, View,StyleSheet} from 'react-native';
 import {getLeadTask} from '../Network/NetworkBuilder';
 import {useSelector} from 'react-redux';
 import {IC_CHANGE_ASSIGNEE, IC_SMALL_ARROW} from '../Assets/Images';
@@ -16,7 +16,6 @@ function LeadTask(props) {
     
     async function fetchLeadTask() {
         const response = await getLeadTask(header, cardItem?.id);
-      //  console.log('responseTasks', response.data);
         setTasks(response.data.tasks);
     }
     
@@ -27,9 +26,9 @@ function LeadTask(props) {
     
     return (
         <View>
-            <View style={{flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingTop: 10}}>
+            <View style={styles.mainView}>
                 <TouchableOpacity onPress={() => setHide(!hide)}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', paddingLeft: 10}}>
+                    <View style={styles.headingView}>
                         <View>
                             <Image source={IC_SMALL_ARROW} style={{
                                 width: 10,
@@ -49,10 +48,7 @@ function LeadTask(props) {
                     tasks.map((item) => {
                         return (
                             <View key={item?.id}>
-                                <View style={{
-                                    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
-                                    paddingLeft: 30, paddingRight: 15, paddingTop: 10, paddingBottom: 10,
-                                }}>
+                                <View style={styles.taskMainView}>
                                     <View>
                                         <Text>{item.name}</Text>
                                     </View>
@@ -62,16 +58,7 @@ function LeadTask(props) {
                                                 {moment(item.date).format('D MMM')}
                                             </Text>
                                         </View>
-                                        <View style={{
-                                            height: 32,
-                                            width: 32,
-                                            borderRadius: 33,
-                                            borderStyle: 'dashed',
-                                            borderWidth: 1,
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            borderColor: 'gray',
-                                        }}>
+                                        <View style={styles.assigneeImageView}>
                                             {item.assignee ?
                                                 <UserAvatar size={33}
                                                             name={item.assignee.name?.charAt(0)?.toUpperCase()}/>
@@ -99,3 +86,22 @@ function LeadTask(props) {
 }
 
 export default LeadTask;
+
+const styles=StyleSheet.create({
+    mainView:{flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingTop: 10},
+    headingView:{flexDirection: 'row', alignItems: 'center', paddingLeft: 10},
+    taskMainView:{
+        flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+        paddingLeft: 30, paddingRight: 15, paddingTop: 10, paddingBottom: 10,
+    },
+    assigneeImageView:{
+        height: 32,
+        width: 32,
+        borderRadius: 33,
+        borderStyle: 'dashed',
+        borderWidth: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: 'gray',
+    }
+})
